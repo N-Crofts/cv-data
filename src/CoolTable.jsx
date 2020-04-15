@@ -25,50 +25,98 @@ function forecast(x, ky, kx) {
 
 
 class CoolTable extends Component {
+
+  state = {
+    conCase: "",
+    conIncreaseTest: ""
+  }
+
+  handleNewCases = () => {
+    let conCase7
+    let conCase6
+    let conCase = {...this.state.conCase}
+    let conIncreaseTest = { ...this.state.conIncreaseTest }
+    if (conCase === "") {
+      conIncreaseTest = this.state.conIncreaseTest
+    }
+    conIncreaseTest = ((conCase7 / conCase6 - 1) * 100)
+  }
   
   render() {
 
-    const dL1 = "Days Since Patient Zero"
-    const dL2 = "Confirmed Cases"
-    const dL3 = "Predicted Cases"
-    const dL4 = "Confirmed Increase"
-    const dL5 = "Predicted Increase"
+    //////// HEADER ROW
 
-    const pZ1 = 1
-    const cC1 = 278
-    const pC1 = 278
-    const cI1 = 0
-    const pI1 = 0
+    const daysSince = "Days Since Outbreak"
+    const conCases = "Confirmed Cases"
+    const preCases = "Predicted Cases"
+    const conIncrease = "Confirmed Increase"
+    const preIncrease = "Predicted Increase"
 
-    const pZ2 = 2
-    const cC2 = 326
-    const pC2 = 326
-    const cI2 = 17.27 + ' %'
-    const pI2 = 17.27 + ' %'
+    //////// DATA ROW 1
 
-    const pZ3 = 3
-    const cC3 = 580
-    const pC3 = forecast(4, 
-      [cC1, cC2], 
-      [pZ1, pZ2])
-    const cI3 = ((cC3 / cC2 - 1) * 100)
-    const pI3 = ((pC3 / pC2 - 1) * 100)
+    const day1 = 1
+    const conCase1 = 278
+    const preCase1 = 278
+    const conInc1 = 0
+    const preInc1 = 0
 
-    const pZ4 = 4
-    const cC4 = 845
-    const pC4 = forecast(5, 
-      [cC1, cC2, cC3], 
-      [pZ1, pZ2, pZ3])
-    const cI4 = ((cC4 / cC3 - 1) * 100)
-    const pI4 = ((pC4 / pC3 - 1) * 100)
+    //////// DATA ROW 2
 
-    const pZ5 = 5
-    const cC5 = 1317
-    const pC5 = forecast(6, 
-      [cC1, cC2, cC3, cC4], 
-      [pZ1, pZ2, pZ3, pZ4])
-    const cI5 = ((cC5 / cC4 - 1) * 100)
-    const pI5 = ((pC5 / pC4 - 1) * 100)
+    const day2 = 2
+    const conCase2 = 326
+    const preCase2 = 326
+    const conInc2 = 17.27 + ' %'
+    const preInc2 = 17.27 + ' %'
+
+    //////// DATA ROW 3
+
+    const day3 = 3
+    const conCase3 = 580
+    const preCase3 = forecast(4, 
+      [conCase1, conCase2], 
+      [day1, day2])
+    const conInc3 = ((conCase3 / conCase2 - 1) * 100)
+    const preInc3 = ((conCase3 / preCase2 - 1) * 100)
+
+    //////// DATA ROW 4
+
+    const day4 = 4
+    const conCase4 = 845
+    const preCase4 = forecast(5, 
+      [conCase1, conCase2, conCase3], 
+      [day1, day2, day3])
+    const conInc4 = ((conCase4 / conCase3 - 1) * 100)
+    const preInc4 = ((preCase4 / preCase3 - 1) * 100)
+
+    //////// DATA ROW 5
+
+    const day5 = 5
+    const conCase5 = 1317
+    const preCase5 = forecast(6, 
+      [conCase1, conCase2, conCase3, conCase4], 
+      [day1, day2, day3, day4])
+    const conInc5 = ((conCase5 / conCase4 - 1) * 100)
+    const preInc5 = ((preCase5 / preCase4 - 1) * 100)
+
+    //////// DATA ROW 6
+
+    const day6 = 6
+    const conCase6 = 3333
+    const preCase6 = forecast(7, 
+      [conCase1, conCase2, conCase3, conCase4, conCase5], 
+      [day1, day2, day3, day4, day5])
+    const conInc6 = ((conCase6 / conCase5 - 1) * 100)
+    const preInc6 = ((preCase6 / preCase5 - 1) * 100)
+
+    //////// DATA ROW 7
+
+    const day7 = 7
+    const conCase7 = 3456
+    const preCase7 = forecast(8, 
+      [conCase1, conCase2, conCase3, conCase4, conCase5, conCase6], 
+      [day1, day2, day3, day4, day5, day6])
+    const conInc7 = this.handleNewCases()
+    const preInc7 = ((preCase7 / preCase6 - 1) * 100)
 
 
     return (
@@ -86,39 +134,53 @@ class CoolTable extends Component {
           </thead>
           <tbody>
             <tr>
-              <td data-label={dL1}>{pZ1}</td>
-              <td data-label={dL2}>{cC1}</td>
-              <td data-label={dL3}>{pC1}</td>
-              <td data-label={dL4}>{cI1.toFixed(2) + ' %'}</td>
-              <td data-label={dL5}>{pI1.toFixed(2) + ' %'}</td>
+              <td data-label={daysSince}>{day1}</td>
+              <td data-label={conCases}>{conCase1}</td>
+              <td data-label={preCases}>{preCase1}</td>
+              <td data-label={conIncrease}>{conInc1.toFixed(2) + ' %'}</td>
+              <td data-label={preIncrease}>{preInc1.toFixed(2) + ' %'}</td>
             </tr>
             <tr>
-              <td data-label={dL1}>{pZ2}</td>
-              <td data-label={dL2}>{cC2}</td>
-              <td data-label={dL3}>{pC2}</td>
-              <td data-label={dL4}>{cI2}</td>
-              <td data-label={dL5}>{pI2}</td>
+              <td data-label={daysSince}>{day2}</td>
+              <td data-label={conCases}>{conCase2}</td>
+              <td data-label={preCases}>{preCase2}</td>
+              <td data-label={conIncrease}>{conInc2}</td>
+              <td data-label={preIncrease}>{preInc2}</td>
             </tr>
             <tr>
-              <td data-label={dL1}>{pZ3}</td>
-              <td data-label={dL2}>{cC3}</td>
-              <td data-label={dL3}>{pC3}</td>
-              <td data-label={dL4}>{cI3.toFixed(2) + ' %'}</td>
-              <td data-label={dL5}>{pI3.toFixed(2) + ' %'}</td>
+              <td data-label={daysSince}>{day3}</td>
+              <td data-label={conCases}>{conCase3}</td>
+              <td data-label={preCases}>{preCase3}</td>
+              <td data-label={conIncrease}>{conInc3.toFixed(2) + ' %'}</td>
+              <td data-label={preIncrease}>{preInc3.toFixed(2) + ' %'}</td>
             </tr>
             <tr>
-              <td data-label={dL1}>{pZ4}</td>
-              <td data-label={dL2}>{cC4}</td>
-              <td data-label={dL3}>{pC4.toFixed(0)}</td>
-              <td data-label={dL4}>{cI4.toFixed(2) + ' %'}</td>
-              <td data-label={dL5}>{pI4.toFixed(2) + ' %'}</td>
+              <td data-label={daysSince}>{day4}</td>
+              <td data-label={conCases}>{conCase4}</td>
+              <td data-label={preCases}>{preCase4.toFixed(0)}</td>
+              <td data-label={conIncrease}>{conInc4.toFixed(2) + ' %'}</td>
+              <td data-label={preIncrease}>{preInc5.toFixed(2) + ' %'}</td>
             </tr>
             <tr>
-              <td data-label={dL1}>{pZ5}</td>
-              <td data-label={dL2}>{cC5}</td>
-              <td data-label={dL3}>{pC5.toFixed(0)}</td>
-              <td data-label={dL4}>{cI5.toFixed(2) + ' %'}</td>
-              <td data-label={dL5}>{pI5.toFixed(2) + ' %'}</td>
+              <td data-label={daysSince}>{day5}</td>
+              <td data-label={conCases}>{conCase5}</td>
+              <td data-label={preCases}>{preCase5.toFixed(0)}</td>
+              <td data-label={conIncrease}>{conInc5.toFixed(2) + ' %'}</td>
+              <td data-label={preIncrease}>{preInc5.toFixed(2) + ' %'}</td>
+            </tr>
+            <tr>
+              <td data-label={daysSince}>{day6}</td>
+              <td data-label={conCases}>{conCase6}</td>
+              <td data-label={preCases}>{preCase6.toFixed(0)}</td>
+              <td data-label={conIncrease}>{conInc6.toFixed(2) + ' %'}</td>
+              <td data-label={preIncrease}>{preInc6.toFixed(2) + ' %'}</td>
+            </tr>
+            <tr>
+              <td data-label={daysSince}>{day7}</td>
+              <td data-label={conCases}>{conCase7}</td>
+              <td data-label={preCases}>{preCase7.toFixed(0)}</td>
+              <td data-label={conIncrease}>{conInc7}</td>
+              <td data-label={preIncrease}>{preInc7.toFixed(2) + ' %'}</td>
             </tr>
           </tbody>
         </table>
